@@ -7,47 +7,29 @@ function getUserEnteredValue() {
     return parseInt(userInput.value);
 }
 
-// generates and write calculation log
-
-// function finalResult() {
-
-// }
-
 function createWriteLog(operator, beforeCalcDescription, calcNumber) {
     const calculationDescription = `${beforeCalcDescription} ${operator} ${calcNumber}`;
     outputResult(currentResult, calculationDescription); //from vendor
-    const data = {
-        result: currentResult,
-        desc: calculationDescription
+}
+
+function writeLog(operationIdentifier, prevResult, operationNumber, newResult) {
+    const logEntry = {
+        operation: operationIdentifier,
+        prevResult: prevResult,
+        number: operationNumber,
+        result: newResult,
     }
-    logEntries.push(data);
-    // dataList(logEntries);
-    // console.log(logEntries);
-    for (const data of logEntries) {
-        const dataEl = document.createElement("ul");
-        dataEl.innerHTML = `<li>${data.desc}</li><li>${data.result}</li>`;
-        logDetails.append(dataEl)
-    }
+    logEntries.push(logEntry);
     console.log(logEntries);
 }
 
-// function dataList(datalist) {
-//     for (const data of datalist) {
-//         const dataEl = document.createElement("li");
-//         dataEl.innerHTML = `<span>${data.result}</span><span>${data.desc}</span>`
-//         logDetails.append(dataEl)
-//     }
-// }
 
 function add() {
     const enteredNumber = getUserEnteredValue();
     const beforeCalc = currentResult;
     currentResult = currentResult + enteredNumber;
     createWriteLog("+", beforeCalc, enteredNumber);
-    // logEntries.push(enteredNumber);
-    // console.log(logEntries);
-    // finalResult()
-    // dataList(logEntries);
+    writeLog("ADD", beforeCalc, enteredNumber, currentResult);
 
 }
 function subtract() {
@@ -55,24 +37,24 @@ function subtract() {
     const beforeCalc = currentResult;
     currentResult = currentResult - enteredNumber;
     createWriteLog("-", beforeCalc, enteredNumber);
-    // logEntries.push(enteredNumber);
-    // console.log(logEntries);
+    writeLog("SUBTRACT", beforeCalc, enteredNumber, currentResult);
+
 }
 function multiply() {
     const enteredNumber = getUserEnteredValue();
     const beforeCalc = currentResult;
     currentResult = currentResult * enteredNumber;
     createWriteLog("*", beforeCalc, enteredNumber);
-    // logEntries.push(enteredNumber);
-    // console.log(logEntries);
+    writeLog("MULTIPLY", beforeCalc, enteredNumber, currentResult);
+
 }
 function divide() {
     const enteredNumber = getUserEnteredValue();
     const beforeCalc = currentResult;
     currentResult = currentResult / enteredNumber;
     createWriteLog("/", beforeCalc, enteredNumber);
-    // logEntries.push(enteredNumber);
-    // console.log(logEntries);
+    writeLog("DIVIDE", beforeCalc, enteredNumber, currentResult);
+
 }
 
 addBtn.addEventListener("click", add);
