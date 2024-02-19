@@ -37,9 +37,16 @@ const startDeleteMovieHandler = (movieId) => {
     deleteModal.classList.add("visible");
     toggleBackdrop();
     const cancelDeletionButton = deleteModal.querySelector(".btn--passive")
-    const confirmDeletionButton = deleteModal.querySelector(".btn--danger")
+    let confirmDeletionButton = deleteModal.querySelector(".btn--danger")
+
+    confirmDeletionButton.replaceWith(confirmDeletionButton.cloneNode(true));
+    confirmDeletionButton = deleteModal.querySelector(".btn--danger");
+
+    // confirmAddMovieButton.removeEventListener("click", deleteMovieMovieHandler.bind(null, movieId)); // will not work
+    cancelAddMovieButton.removeEventListener("click", closeMovieDeletionModal)
+
     cancelDeletionButton.addEventListener("click", closeMovieDeletionModal)
-    confirmDeletionButton.addEventListener("click", deleteMovieMovieHandler.bind(null, movieId))
+    confirmDeletionButton.addEventListener("click", deleteMovieMovieHandler.bind(null, movieId));
 
 }
 
@@ -79,7 +86,6 @@ const removeBackdropHandler = () => {
 //close the add modal
 const closeMovieModal = () => {
     addMovieModal.classList.remove("visible");
-
 }
 
 // show the add modal and backdrop toggle
