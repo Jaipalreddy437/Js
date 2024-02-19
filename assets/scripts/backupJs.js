@@ -37,16 +37,9 @@ const startDeleteMovieHandler = (movieId) => {
     deleteModal.classList.add("visible");
     toggleBackdrop();
     const cancelDeletionButton = deleteModal.querySelector(".btn--passive")
-    let confirmDeletionButton = deleteModal.querySelector(".btn--danger")
-
-    confirmDeletionButton.replaceWith(confirmDeletionButton.cloneNode(true));
-    confirmDeletionButton = deleteModal.querySelector(".btn--danger");
-
-    // confirmAddMovieButton.removeEventListener("click", deleteMovieMovieHandler.bind(null, movieId)); // will not work
-    cancelAddMovieButton.removeEventListener("click", closeMovieDeletionModal)
-
+    const confirmDeletionButton = deleteModal.querySelector(".btn--danger")
     cancelDeletionButton.addEventListener("click", closeMovieDeletionModal)
-    confirmDeletionButton.addEventListener("click", deleteMovieMovieHandler.bind(null, movieId));
+    confirmDeletionButton.addEventListener("click", deleteMovieMovieHandler.bind(null, movieId))
 
 }
 
