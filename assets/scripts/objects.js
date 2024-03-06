@@ -11,10 +11,15 @@ const renderMovies = (filter = "") => {
     const filteredMovies = !filter ? movies : movies.filter(movie => movie.info.title.includes(filter))
     filteredMovies.map(movie => {
         const movieEl = document.createElement("li");
-        let text = movie.info.title + "-";
-        for (const key in movie.info) {
-            if (key !== "title") {
-                text += `${key} : ${movie.info[key]}`
+        const { info, ...otherProps } = movie;
+        let { getFormatTitle } = movie;
+        // const { title: movieTitle } = info;
+        // getFormatTitle = getFormatTitle.bind(movie)
+
+        let text = getFormatTitle.apply(movie) + " - ";
+        for (const key in info) {
+            if (key !== "title" && key !== "_title") {
+                text += `${key} : ${info[key]}`
             }
         }
         movieEl.textContent = text;
@@ -28,7 +33,6 @@ const addMovieHandler = () => {
     let extraName = document.getElementById("extra-name").value;
     let extraValue = document.getElementById("extra-value").value;
     if (
-        title.trim() === "" ||
         extraName.trim() === "" ||
         extraValue.trim() === "") {
         alert("Please enter valid data");
@@ -36,20 +40,36 @@ const addMovieHandler = () => {
     }
     const newMovie = {
         info: {
-            title,
+            set title(val) {
+                if (val.trim() === "") {
+                    this._title = "DEFAULT";
+                    return;
+                }
+                this._title = val;
+            },
+            get title() {
+                return this._title;
+            },
             [extraName]: extraValue
         },
-        id: Math.random(),
+        id: Math.random().toString(),
+        getFormatTitle() {
+            return this.info.title.toUpperCase();
+        }
     }
+
+    newMovie.info.title = title;
 
     movies.push(newMovie);
     renderMovies();
 }
 
 const searchMovieHandler = () => {
-    const filtered = document.getElementById("filter-title");
+    const filtered = document.getElementById("filter-title").value;
     renderMovies(filtered);
 }
 
 addMovieButton.addEventListener("click", addMovieHandler);
 searchBtn.addEventListener("click", searchMovieHandler)
+
+
