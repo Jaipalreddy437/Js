@@ -10,34 +10,13 @@ body {
   margin: 0;
 }
 
-label {
-  font-weight: bold;
-  display: block;
-  color: #494949;
-}
-
-input {
-  font: inherit;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  color: #494949;
-  width: 100%;
-  display: block;
-  margin: 1rem 0;
-}
-
-input:focus {
-  outline: none;
-  border-color: #ff0062;
-}
-
 button {
   font: inherit;
-  border: 1px solid #ff0062;
+  border: 1px solid #000053;
   color: white;
-  padding: 1rem 2rem;
+  background: #000053;
+  padding: 0.5rem 1.5rem;
   border-radius: 5px;
-  background: #ff0062;
   cursor: pointer;
 }
 
@@ -47,45 +26,72 @@ button:focus {
 
 button:hover,
 button:active {
-  background: #ff3482;
-  border-color: #ff3482;
+  background: #12128a;
+  border-color: #12128a;
 }
 
-.card {
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+label,
+input,
+textarea {
+  display: block;
+  margin: 0.5rem 0;
 }
 
-.inline-controls {
-  display: flex;
+input,
+textarea {
+  width: 100%;
+  font: inherit;
+  padding: 0.15rem 0.25rem;
+  border: 1px solid #ccc;
 }
 
-.control {
-  margin: 1rem;
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #000053;
 }
 
-#user-input,
-#movie-list,
-#filter {
-  width: 50rem;
+section {
+  width: 40rem;
   max-width: 90%;
   margin: 2rem auto;
+  border: 1px solid #ccc;
+  padding: 1.5rem;
 }
 
-#movie-list {
-  display: none;
+.form-control {
+  margin: 0.5rem 0;
+}
+
+.posts {
   list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-item {
+  margin: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.26);
   padding: 1rem;
 }
 
-#movie-list.visible {
-  display: block;
+.post-item h2,
+.post-item p {
+  margin: 0.5rem 0;
 }
 
-#movie-list li {
-  margin: 1rem;
-  color: #ff0062;
-  font-weight: bold;
+.post-item h2 {
   font-size: 1.5rem;
+  color: #414141;
+}
+
+.post-item button {
+  border-color: #920101;
+  background: #920101;
+}
+
+.post-item button:hover,
+.post-item button:active {
+  border-color: #dd2929;
+  background: #dd2929;
 }
