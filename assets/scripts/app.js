@@ -1,15 +1,30 @@
-const listElement = document.querySelector(".posts");
-const postTemplate = document.getElementById("single-post")
-const xhr = new XMLHttpRequest();
-xhr.open("GET", "https://jsonplaceholder.typicode.com/posts");
-xhr.responseType = "json";
-xhr.onload = function () {
-    const listOfPosts = xhr.response;
-    for (const post of listOfPosts) {
-        const listEl = document.importNode(postTemplate.content, true);
-        listEl.querySelector("h2").textContent = post.title.toUpperCase();
-        listEl.querySelector("p").textContent = post.body;
-        listElement.appendChild(listEl);
+
+import { ProjectList } from "./App/ProjectList";
+
+class App {
+    static init() {
+        const activeProjectsList = new ProjectList('active');
+        const finishedProjectsList = new ProjectList('finished');
+        activeProjectsList.setSwitchHandlerFunction(
+            finishedProjectsList.addProject.bind(finishedProjectsList)
+        );
+        finishedProjectsList.setSwitchHandlerFunction(
+            activeProjectsList.addProject.bind(activeProjectsList)
+        );
+
+        // const timerId = setTimeout(this.startAnalytics, 3000);
+
+        // document.getElementById('stop-analytics-btn').addEventListener('click', () => {
+        //   clearTimeout(timerId);
+        // });
+    }
+
+    static startAnalytics() {
+        const analyticsScript = document.createElement('script');
+        analyticsScript.src = 'assets/scripts/Utility/Analytics.js';
+        analyticsScript.defer = true;
+        document.head.append(analyticsScript);
     }
 }
-xhr.send();
+
+App.init();
